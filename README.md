@@ -6,7 +6,7 @@
 <br/>
 
 ## **1. 프로젝트 소개**
-### **1-(1) 대회명**
+### **1-(1) 프로젝트명**
 - 중앙대학교 응용통계학과 데이터 분석 공모전
 
 
@@ -29,7 +29,10 @@
 
 ## **2. 프로젝트 내용**
 ### **2-(1) 문제 정의**
-- KBO리그 타자를 대상으로 해당 경기 안타 여부를 분류하는 딥러닝 모델 
+- 코로나19로 인해 극장 관객이 예년에 비해 95% 이하로 급감하였음 (2020.10 기준)
+- 하지만, 보다 안전하게 문화생활을 영위할 수 있는 자동차 극장 이용률은 165% 증가하였음 (2020.10 기준)
+- 서울시 내 자동차 극장은 단, 1개 (2020.11 기준)
+- 추가적인 자동차 극장의 설치로 문화 생활의 활성화와 코로나 블루 해소를 도모
 
 
 <br/>
@@ -42,69 +45,56 @@
 
 
 ### **2-(3) 데이터 수집 및 전처리**
-- 스탯티즈에서 4년도의 타자 90명의 데이터 수집
+- 서울 열린데이터 광장(data.seoul.go.kr), 우리 마을 상권분석(golmok.seoul.go.kr)에서 인구요인(주민등록인구, 상존인구 등), 지역 특성 요인(도로면적, 실거래가 등) 데이터 수집 
 
-![data수집](https://user-images.githubusercontent.com/80115212/135566371-7592a0ee-b887-4711-b1bd-a29199fd5ef4.PNG)
+![data](https://user-images.githubusercontent.com/80115212/135966243-ebc9d9cf-7bb6-4b4c-9a34-9ed83fe4c33d.PNG)
 
-- 데이터 정규화(MIN-MAX Scaling) 및 아웃라이어 제거
-- 학습 데이터 : 검증 데이터 = 7 : 3
+- 회귀분석 4가지 가정(선형성, 독립성, 등분산성, 정규성) 만족
+- 다중공선성 해결(VIF 지수)
+- 아웃라이어 제거
+
 
 <br/>
 
 
-### **2-(4) 관련 학습**
-- 유사한 연구 논문 리뷰
-- MLP, RNN, LSTM 구조
-- Python Keras와 Scikit-learn 라이브러리
-- MLP 모델 성능 개선 방안
-- 과적합(Overfitting) 방지
+### **2-(4) 회귀 모형 도출**
+- 단계적 변수 선택법을 통해 최종 모형 설정
+
+![최종모형](https://user-images.githubusercontent.com/80115212/135968770-6289705e-988c-441e-bfab-6069bf55e95e.PNG)
+
 
 <br/>
 
 
-### **2-(5) 모델 설계**
-- MLP, RNN, LSTM 사용
-- Node, Hidden layer 조절
-- Experiment setting
-    * Activatoin function: ReLU & Sigmoid(출력층)
-    * Loss function: Binary Crossentrophy & Mean Squared Error
-    * Weight Initialization : Random Uniform -> He Initialization
-    * Optimization : Rmsprop, Adam
-    
-- Dropout 적용 여부
-- 새로운 지표 생성(최근 성적, Home/Away, 상대 vs)
+### **2-(5) 회귀 모형 활용**
+- 회귀 모형의 영화관 좌석 추정 수와 실제 영화관 좌석 수의 차이를 활용
+- 영화관 좌석 차이가 양수인 경우 **'과잉공급'** 으로 판단, 음수인 경우 **'과소공급'** 으로 판단
 
-![model](https://user-images.githubusercontent.com/80115212/135570765-67cd9854-e615-419e-afab-6d83c2b41220.PNG)
+![시각화](https://user-images.githubusercontent.com/80115212/135968778-0a3e82f5-7c66-4e10-9695-6bb2f51b0416.PNG)
 
 <br/>
 
 
-### **2-(6) 모델 학습 과정**
-- MLP (최근 성적 지표, Home/away 지표, Vs 지표 제외)
+### **2-(6) 후보지 선정**
+- 추가적으로 **차량 접근 용이성**, **토지 활용 가능 여부**, **주변 편의 시설**을 고려하여 서초구 內 후보지 선정
 
-   ![model1](https://user-images.githubusercontent.com/80115212/135569722-7e5ca8a7-a1bd-41a7-b59d-13c4536067f6.PNG)
-   * Loss: 0.509
-   * Accuracy: 0.748
+![후보지](https://user-images.githubusercontent.com/80115212/135968787-3547e754-9462-44f6-8142-5eae05520e68.PNG)
 
-- MLP (위의 모델에서 지표 추가)
-
-   ![model2](https://user-images.githubusercontent.com/80115212/135569988-6c3a9278-131a-46b3-80e9-7493e13a8301.PNG)
-   * Loss: 0.407
-   * Accuracy: 0.813
-
-- GRU (Loss function: MSE)
-
-   ![model3](https://user-images.githubusercontent.com/80115212/135570110-c8d4938e-265c-4b0e-9308-bc75d9943edb.PNG)
-   * Loss: 0.135
-   * Accuracy: 0.816
 
 <br/>
 
-### **2-(7) 모델 성능 비교**
-![model_result](https://user-images.githubusercontent.com/80115212/135570773-967891c2-5fe3-4d6b-816c-4ecc77134124.PNG)
-
-<br/>
 
 ## **3. 결론**
-기존의 지표에 최근 성적 지표, Home/Away 지표, Vs 지표를 추가하여 분류 정확도 5~6% 향상을 이루었고 최종적으로 82%의 정확도를 갖는 딥러닝 모델을 설계하였다.
-이를 미루어보아 더욱 방대한 데이터의 수집과 창의적인 지표를 추가한다면 모델의 성능을 더 올릴 수 있을것이라 기대된다.
+- 최종 후보지 1 (TheK 호텔)
+
+![최종후보1](https://user-images.githubusercontent.com/80115212/135969051-e444a896-d4ba-4fae-80ea-d28923b383a5.PNG)
+
+- 최종 후보지 2 (내곡동 주민센터 주차장)
+
+![최종후보2](https://user-images.githubusercontent.com/80115212/135969090-f2e4e144-2444-45a9-8f71-d643d7ef09d4.PNG)
+<br/>
+다중회귀분석을 통해 영화관 좌석 수에 영향을 미치는 요인을 파악하였다. 이러한 과정 속에 실거래가가 높을수록, 도로면적이 넓을수록 해당 구의 영화관 총 좌석 수가 증가하는 경향을 발견하였다.
+ 
+회귀 분석 모형을 통해 구별 영화관 좌석 추정 수와 실제 영화관 좌석 수의 차이를 살피며 서울시 내에 영화관 추가 설치가 필요한 구역이 서초구임을 발견했다. 따라서, 코로나 19 상황을 고려하여 기존의 영화관 대신 자동차 극장 설치를 제안한다.
+
+최종적으로, 서초구 內 의 추가적인 고려사항을 종합하여 TheK호텔과, 내곡동 주민센터 주차장에 자동차 극장 설치를 제안한다.
