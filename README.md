@@ -1,20 +1,27 @@
 # **CAU Data Analysis Contest**
-![1page](https://user-images.githubusercontent.com/80115212/135577492-fe492d70-ba6d-49a6-b050-75fa7b2c0f99.PNG)
+![1page](https://user-images.githubusercontent.com/80115212/135949754-c0b149c9-35de-4c62-8555-baa961b3641a.PNG)
 
 
 <br/>
 <br/>
 
 ## **1. 프로젝트 소개**
-### **1-(1) PE 프로그램**
-- 중앙대학교 SW 복수전공 학부연구생 (시각영상미디어연구실)
+### **1-(1) 대회명**
+- 중앙대학교 응용통계학과 데이터 분석 공모전
 
 
 <br/>
 
 
 ### **1-(2) 프로젝트 주제** 
-- 다층 퍼셉트론(MLP)과 순환신경망(RNN) 기반 한국 프로야구 결과 예측 모델 개발
+- 서울시 자동차 극장 최적입지 추천
+
+
+<br/>
+
+
+### **1-(3) 프로젝트 기간** 
+- 2020.09.20 ~ 2020.11.16
 
 
 <br/>
@@ -29,8 +36,7 @@
 
 
 ### **2-(2) 분석 목표**
-- 이진 분류 문제에 효과적인 딥러닝 모델 네트워크를 개발   
-- Multi Layer Perceptron(MLP)과 Recurrnet Neural Network(RNN)에 기반한 네트워크 설계
+- 다중회귀모형을 통해 서울시 내 자동차 극장 입지 추천   
 
 <br/>
 
